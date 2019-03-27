@@ -18,45 +18,45 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.algaworks.comercial.model.Oportunidade;
-import com.algaworks.comercial.repository.OportunidadeRepository;
+import com.algaworks.comercial.model.Opportunity;
+import com.algaworks.comercial.repository.OpportunityRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/oportunidades")
+@RequestMapping("/opportunities")
 public class OportunidadeController {
 
 	@Autowired
-	private OportunidadeRepository oportunidadeRepository;
+	private OpportunityRepository opportunityRepository;
 	
 	@GetMapping
-	public List<Oportunidade> listar() {
-		return oportunidadeRepository.findAll();
+	public List<Opportunity> list() {
+		return opportunityRepository.findAll();
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Oportunidade> buscar(@PathVariable Long id) {
-		Optional<Oportunidade> oportunidade = oportunidadeRepository.findById(id);
-		if(oportunidade.isPresent()) {
-			return ResponseEntity.ok(oportunidade.get());			
+	public ResponseEntity<Opportunity> fetch(@PathVariable Long id) {
+		Optional<Opportunity> opportunity = opportunityRepository.findById(id);
+		if(opportunity.isPresent()) {
+			return ResponseEntity.ok(opportunity.get());			
 		}
 		return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Oportunidade adicionar(@Valid @RequestBody Oportunidade oportunidade) {
-		Optional<Oportunidade> oportunidadeExistente = oportunidadeRepository
-				.findByDescricaoAndNomeProspecto(oportunidade.getDescricao(), oportunidade.getNomeProspecto());
-		if(oportunidadeExistente.isPresent()) {
+	public Opportunity add(@Valid @RequestBody Opportunity opportunity) {
+		Optional<Opportunity> existingOpportunity = opportunityRepository
+				.findByDescriptionAndProspectusName(opportunity.getDescription(), opportunity.getProspectusName());
+		if(existingOpportunity.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
-					"Já existe uma oportunidade para este prospecto com a mesma descrição");
+					"There is already an opportunity for this prospectus with the same description");
 		}
-		return oportunidadeRepository.save(oportunidade);
+		return opportunityRepository.save(opportunity);
 	}
 	
-	//TODO Exclusao
+	//TODO Exclude
 	
-	//TODO Atualização
+	//TODO Update
 	
 }

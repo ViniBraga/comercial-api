@@ -16,8 +16,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "OPORTUNIDADE")
-public class Oportunidade {
+@Table(name = "OPPORTUNITY")
+public class Opportunity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +25,14 @@ public class Oportunidade {
 	
 	@NotEmpty
 	@Size(max = 80)
-	@Column(name = "nome_prospecto")
-	private String nomeProspecto;
+	@Column(name = "prospectus_name")
+	private String prospectusName;
 	
 	@NotEmpty
 	@Size(max = 200)
-	private String descricao;
+	private String description;
 	
 	@Min(0)
-	private BigDecimal valor;
+	private BigDecimal value;
 
 }
