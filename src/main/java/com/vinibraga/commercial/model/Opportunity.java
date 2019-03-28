@@ -1,4 +1,4 @@
-package com.algaworks.comercial.model;
+package com.vinibraga.commercial.model;
 
 import java.math.BigDecimal;
 

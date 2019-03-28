@@ -1,10 +1,10 @@
-package com.algaworks.comercial.repository;
+package com.vinibraga.commercial.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.algaworks.comercial.model.Opportunity;
+import com.vinibraga.commercial.model.Opportunity;
 
 public interface OpportunityRepository extends JpaRepository<Opportunity, Long>{
 

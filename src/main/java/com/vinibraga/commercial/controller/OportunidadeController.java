@@ -1,4 +1,4 @@
-package com.algaworks.comercial.controller;
+package com.vinibraga.commercial.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.algaworks.comercial.model.Opportunity;
-import com.algaworks.comercial.repository.OpportunityRepository;
+import com.vinibraga.commercial.model.Opportunity;
+import com.vinibraga.commercial.repository.OpportunityRepository;
 
 @CrossOrigin
 @RestController
@@ -55,7 +55,16 @@ public class OportunidadeController {
 		return opportunityRepository.save(opportunity);
 	}
 	
-	//TODO Exclude
+	@GetMapping(path = "delete/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable Long id) {
+		Optional<Opportunity> existingOpportunity = opportunityRepository.findById(id);
+		if(existingOpportunity.isPresent()) {
+			opportunityRepository.deleteById(id);
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	//TODO Update
 	

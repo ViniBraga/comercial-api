@@ -1,4 +1,4 @@
-package com.algaworks.comercial;
+package com.vinibraga.commercial;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
